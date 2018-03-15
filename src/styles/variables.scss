@@ -1,0 +1,21 @@
+$primary: #EB5757;
+$secondary: #000000;
+$highlight: #ff6a00;
+$red: #801a1a;
+$green: #3cad24;
+$black: #242828;
+$dark-grey: #666;
+$grey: #888;
+$light-grey: #a0a0a0;
+
+:export {
+  primary: $primary;
+  secondary: $secondary;
+  highlight: $highlight;
+  red: $red;
+  green: $green;
+  black: $black;
+  darkGrey: $dark-grey;
+  grey: $grey;
+  lightGrey: $light-grey;
+}

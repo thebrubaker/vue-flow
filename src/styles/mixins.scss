@@ -1,0 +1,276 @@
+@mixin sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+@mixin input {
+  display: block;
+  width: 100%;
+  padding: 1rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1;
+  background-color: transparent;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid $black;
+  border-radius: 0.25rem;
+  transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  color: $black;
+  font-family: inherit;
+  outline: none;
+}
+
+@mixin form-input {
+  /deep/ .form-input {
+    margin-bottom: 20px;
+    text-align: left;
+    position: relative;
+  }
+  /deep/ .form-input label {
+    color: rgba(darken($primary, 20), 0.5);
+    font-size: 0.7em;
+    font-weight: bold;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    transform: translateY(100%);
+    transition: opacity 0.1s 0s, transform 0.1s 0s;
+  }
+  /deep/ .form-input.filled label {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.1s 0.1s, transform 0.1s 0.1s;
+  }
+  /deep/ .form-input.focus label {
+    color: $primary;
+  }
+  /deep/ .form-input.label .input-group {
+    position: relative;
+    padding-top: 8px;
+  }
+  /deep/ .form-input .input-group:after {
+    content: '';
+    width: 100%;
+    height: 1px;
+    background-color: $primary;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    transform: scaleX(0);
+    transition: all 0.3s;
+  }
+  /deep/ .form-input.focus .input-group:after {
+    transform: scaleX(1);
+  }
+  /deep/ .form-input.filled .input-group:after {
+    transform: scaleX(1);    
+  }
+  /deep/ .form-input .placeholder {
+    @include input-overlay;
+    color: $grey;
+    position: absolute;
+    border: none;
+    bottom: 0;
+    opacity: 1;
+    transform: translateY(0);    
+    pointer-events: none;
+    transition: all 0.1s 0.1s;
+    line-height: 1.4;
+  }
+  /deep/ .form-input.filled .placeholder {
+    opacity: 0;
+    transform: translateY(-50%);
+    transition: all 0.1s 0s;
+  }
+  /deep/ .form-input i {
+    @include material-icon;
+    color: lighten($primary, 40);
+    font-size: 20px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+  }
+  /deep/ .form-input .icon input {
+    padding-left: 35px;
+  }
+  /deep/ .form-input .icon .placeholder {
+    padding-left: 35px;
+  }
+  /deep/ .form-input input {
+    @include input-overlay;
+  }
+  /deep/ .form-input.valid i {
+    color: $primary;
+  }
+  /deep/ .form-input input:focus + i {
+    color: $primary;
+  }
+  /deep/ .form-input .validation-feedback {
+    font-size: 0.9rem;
+    padding-top: 10px;
+    color: $red;
+  }
+}
+
+@mixin form-input-overlay {
+  @include form-input;
+  /deep/ .form-input label {
+    color: white;
+  }
+  /deep/ .form-input.focus label {
+    color: $primary;
+  }
+  /deep/ .form-input .input-group:after {
+    background-color: white;
+    height: 2px;
+  }
+  /deep/ .form-input .placeholder {
+    color: rgba(white,0.9);
+  }
+  /deep/ .form-input input {
+    @include input-overlay;
+    color: white;
+  }
+  /deep/ .form-input i {
+    color: rgba(white, 0.7);
+  }
+  /deep/ .form-input.valid i {
+    color: white;
+  }
+  /deep/ .form-input input:focus + i {
+    color: white;
+  }
+  /deep/ .form-input .validation-feedback {
+    color: white;
+  }
+}
+
+@mixin input-overlay {
+  @include input;
+  border: none;
+  border-bottom: 1px solid white;
+  border-radius: 0;
+  padding-left: 0;
+}
+
+@mixin button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  padding: 0.9rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.25;
+  border-radius: 0.25rem;
+  transition: all 0.15s ease-in-out;
+  text-transform: none;
+  font-family: inherit;
+  cursor: pointer;
+  background-color: $primary;
+  color: white;
+  &:hover {
+    background-color: darken($primary, 10);
+  }
+  &[disabled] {
+    pointer-events: none;
+    cursor: default;
+    background-color: lighten($primary, 10);
+  }
+  &.passive {
+    background-color: darken(white, 8);
+    color: $black;
+  }
+  &.transparent {
+    background-color: transparent;
+    color: $grey;
+  }
+  &.outline {
+    background-color: transparent;
+    color: $primary;
+    border: 1px solid $primary;
+    &.white {
+      color: white;
+      border: 1px solid white;
+    }
+  }
+}
+
+@mixin button-overlay {
+  @include button;
+  border: 1px solid white;
+  background-color: transparent;
+  color: white;
+  &:hover {
+    background-color: white;
+    color: $primary;
+  }
+  &[disabled] {
+    pointer-events: none;
+    cursor: default;
+    background-color: darken(white,10);
+    color: $primary;
+  }
+}
+
+@mixin page-container {
+  max-width: 1200px;
+  padding: 20px 60px;
+}
+
+@mixin background-multiply($url) {
+  content: '';
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-image: url($url);
+  background-position: center;
+  background-size: cover;
+  z-index: 0;
+  mix-blend-mode: multiply;
+  filter: grayscale(100%);
+  opacity: 0.9;
+}
+
+@mixin backgroundGradient () {
+  background: linear-gradient(to right, $secondary, $primary);
+}
+
+@mixin material-icon () {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px; /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}

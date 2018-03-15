@@ -1,0 +1,23 @@
+@import './transitions';
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  color: $black;
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+}
